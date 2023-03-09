@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JJOOController {
 
-    @GetMapping("/jjoo")
-    public JJOO jjoo(@RequestParam(value = "id_pais") Integer id_pais) {
+    @GetMapping("/juego-olimpico")
+    public ResponseEntity jjoo() {
         ArrayList<JJOO> lista = new ArrayList<JJOO>();
         ArrayList<JJOO> listaFinal = new ArrayList<JJOO>();
         lista.add(new JJOO(1, "España", 1, "Barcelona", 200, "verano"));
@@ -20,12 +23,13 @@ public class JJOOController {
         lista.add(new JJOO(3, "Portugal", 33, "Lisboa", 111, "invierno"));
         lista.add(new JJOO(4, "Alemania", 55, "Berlin", 500, "verano"));
 
-
-        for (int i = 0; i < lista.size(); i++){
+        JJOOWrapper juegosOlimpicosWrapper = new JJOOWrapper(lista);
+        return new ResponseEntity<>(juegosOlimpicosWrapper, HttpStatus.OK);
+        /*for (int i = 0; i < lista.size(); i++){
             if (id_pais == lista.get(i).id_pais()){
                 listaFinal.add(lista.get(i));
             }
         }
-        return listaFinal.get(0);
+        return listaFinal.get(0);*/
     }
 }
