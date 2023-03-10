@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class JJOOController {
 
     @GetMapping("/juego-olimpico")
-    public ResponseEntity jjoo() {
+    public ResponseEntity<JJOOWrapper> jjoo() {
         ArrayList<JJOO> lista = new ArrayList<JJOO>();
-        ArrayList<JJOO> listaFinal = new ArrayList<JJOO>();
+
         lista.add(new JJOO(1, "España", 1, "Barcelona", 200, "verano"));
         lista.add(new JJOO(2, "Francia", 2, "Paris", 300, "verano"));
         lista.add(new JJOO(3, "Portugal", 33, "Lisboa", 111, "invierno"));
@@ -25,11 +25,6 @@ public class JJOOController {
 
         JJOOWrapper juegosOlimpicosWrapper = new JJOOWrapper(lista);
         return new ResponseEntity<>(juegosOlimpicosWrapper, HttpStatus.OK);
-        /*for (int i = 0; i < lista.size(); i++){
-            if (id_pais == lista.get(i).id_pais()){
-                listaFinal.add(lista.get(i));
-            }
-        }
-        return listaFinal.get(0);*/
+
     }
 }
