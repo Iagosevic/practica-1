@@ -4,27 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/juego-olimpico")
+
 public class JJOOController {
 
-    @GetMapping("/juego-olimpico")
-    public ResponseEntity<JJOOWrapper> jjoo() {
-        ArrayList<JJOO> lista = new ArrayList<JJOO>();
+    @Autowired
+    private JJOORepository repository;
 
-        lista.add(new JJOO(1, "España", 1, "Barcelona", 200, "verano"));
-        lista.add(new JJOO(2, "Francia", 2, "Paris", 300, "verano"));
-        lista.add(new JJOO(3, "Portugal", 33, "Lisboa", 111, "invierno"));
-        lista.add(new JJOO(4, "Alemania", 55, "Berlin", 500, "verano"));
-
-        JJOOWrapper juegosOlimpicosWrapper = new JJOOWrapper(lista);
-        return new ResponseEntity<>(juegosOlimpicosWrapper, HttpStatus.OK);
-
+    @GetMapping
+    public ResponseEntity<List<JJOOEntity>> consultarJuegosOlimpicos() {
+        List<JJOOEntity> juegosOlimpicos = repository.findAll();
+        return ResponseEntity.ok(juegosOlimpicos);
     }
 }
