@@ -1,10 +1,9 @@
-package com.qindel.practicas.practica1;
+package com.qindel.practicas.practica1.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Entity
 public class JJOOEntity {

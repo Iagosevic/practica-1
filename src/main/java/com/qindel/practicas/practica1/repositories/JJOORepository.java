@@ -1,15 +1,11 @@
-package com.qindel.practicas.practica1;
+package com.qindel.practicas.practica1.repositories;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import com.qindel.practicas.practica1.entities.JJOOEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@SpringBootApplication
 @Repository
-
 public interface JJOORepository extends JpaRepository<JJOOEntity, Long> {
 
     List<JJOOEntity> findByLastName(String nombre_ciudad);

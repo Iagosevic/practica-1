@@ -1,4 +1,6 @@
-package com.qindel.practicas.practica1;
+package com.qindel.practicas.practica1.wrappers;
+
+import com.qindel.practicas.practica1.records.JJOO;
 
 import java.util.List;
 
