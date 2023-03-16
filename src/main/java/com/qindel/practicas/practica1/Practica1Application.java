@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@SpringBootApplication
 @EnableTransactionManagement
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-//@EnableJpaRepositories("com.qindel.practicas.practica1")
+@EnableJpaRepositories("com.qindel.practicas.practica1.repositories")
 //@EnableJpaRepositories(basePackageClasses = JJOORepository.class)
 public class Practica1Application {
 	public static void main(String[] args) {
