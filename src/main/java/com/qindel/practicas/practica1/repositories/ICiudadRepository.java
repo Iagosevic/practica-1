@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface ICiudadRepository extends JpaRepository<CiudadEntity, Integer> {
+public interface ICiudadRepository extends JpaRepository<CiudadEntity,Integer> {
 
-    CiudadEntity findByNombreCiudad(String nombre_ciudad);
+    CiudadEntity findByNombreciudad(String nombre_ciudad);
 }
