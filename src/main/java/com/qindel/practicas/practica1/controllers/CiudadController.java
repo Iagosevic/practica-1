@@ -11,18 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ciudad")
+@RequestMapping("/ciudades")
 public class CiudadController {
 
     @Autowired
     private ICiudadRepository ciudadRepo;
 
-    @GetMapping("/todas")
+    @GetMapping("/all")
     public List<CiudadEntity> getCiudades(){
         return ciudadRepo.findAll();
     }
-    /*@GetMapping("/{id_ciudad}")
-    public CiudadEntity getCiudadById(@PathVariable String nombre_ciudad){
-        return ciudadRepo.findByNombreCiudad(nombre_ciudad);
-    }*/
+
+    @GetMapping("/{idciudad}")
+    public CiudadEntity getCiudadById(@PathVariable Integer idciudad){
+        return ciudadRepo.findByIdciudad(idciudad);
+    }
+
+    @GetMapping("/ciudad/{nombreciudad}")
+    public CiudadEntity getCiudadByNombre(@PathVariable String nombreciudad){
+        return ciudadRepo.findByNombreciudad(nombreciudad);
+    }
 }
