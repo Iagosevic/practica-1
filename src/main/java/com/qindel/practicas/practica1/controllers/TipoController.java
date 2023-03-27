@@ -19,18 +19,18 @@ public class TipoController {
     @Autowired
     private ITipoRepository tipoRepo;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<TipoEntity> getTipos(){
         return tipoRepo.findAll();
     }
 
-    @GetMapping("/{idtipojjoo}")
-    public TipoEntity getTipoById(@PathVariable Integer idtipojjoo){
+    @GetMapping("/{id-tipo-jjoo}")
+    public TipoEntity getTipoById(@PathVariable("id-tipo-jjoo") Integer idtipojjoo){
         return tipoRepo.findByIdtipojjoo(idtipojjoo);
     }
 
-    @GetMapping("/tipo/{descripciontipo}")
-    public TipoEntity getTipoByDescripcion(@PathVariable String descripciontipo){
+   /* @GetMapping("/tipo/{descripcion-tipo}")
+    public TipoEntity getTipoByDescripcion(@PathVariable("descripcion-tipo") String descripciontipo){
         return tipoRepo.findByDescripciontipo(descripciontipo);
-    }
+    }*/
 }

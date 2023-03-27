@@ -19,7 +19,7 @@ public class SedeController {
     @Autowired
     private ISedeRepository sedeRepo;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<SedeEntity> getSedes(){
         return sedeRepo.findAll();
     }
@@ -29,8 +29,8 @@ public class SedeController {
         return sedeRepo.findByAnho(anho);
     }
 
-    @GetMapping("/sede/{id_sede}")
-    public SedeEntity getSedeByCiudad(@PathVariable Integer id_sede){
+    @GetMapping("/sede/{id-sede}")
+    public SedeEntity getSedeByCiudad(@PathVariable("id-sede") Integer id_sede){
         return sedeRepo.findBySede(id_sede);
     }
 }

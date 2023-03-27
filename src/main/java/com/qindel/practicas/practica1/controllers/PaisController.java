@@ -17,18 +17,18 @@ public class PaisController {
     @Autowired
     private IPaisRepository paisRepo;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<PaisEntity> getpaises(){
         return paisRepo.findAll();
     }
 
-    @GetMapping("/{idpais}")
-    public PaisEntity getpaisById(@PathVariable Integer idpais){
+    @GetMapping("/{id-pais}")
+    public PaisEntity getpaisById(@PathVariable("id-pais") Integer idpais){
         return paisRepo.findByIdpais(idpais);
     }
 
-    @GetMapping("/pais/{nombrepais}")
+ /*   @GetMapping("/pais/{nombre-pais}")
     public PaisEntity getpaisByNombre(@PathVariable String nombrepais){
         return paisRepo.findByNombrepais(nombrepais);
-    }
+    }*/
 }
