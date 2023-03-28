@@ -1,50 +1,65 @@
 package com.qindel.practicas.practica1.entities;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.annotation.processing.Generated;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "ciudad")
 public class CiudadEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_ciudad;
-    private String nombre_ciudad;
-    private Integer id_pais;
-    private Integer valor_ciudad;
+    @Column(name = "id_ciudad")
+    private Integer idciudad;
+    @Column(name = "nombre_ciudad")
+    private String nombreciudad;
+    @Column(name = "id_pais")
+    private Integer idpais;
+    @Column(name = "valor_ciudad")
+    private Integer valorciudad;
 
-    public Integer getId_ciudad() {
-        return id_ciudad;
+    public CiudadEntity(Integer idciudad, String nombreciudad, Integer idpais, Integer valorciudad) {
+        this.idciudad = idciudad;
+        this.nombreciudad = nombreciudad;
+        this.idpais = idpais;
+        this.valorciudad = valorciudad;
     }
 
-    public void setId_ciudad(Integer id_ciudad) {
-        this.id_ciudad = id_ciudad;
+    public CiudadEntity() {
+
     }
 
-    public String getNombre_ciudad() {
-        return nombre_ciudad;
+    public Integer getIdciudad() {
+        return idciudad;
     }
 
-    public void setNombre_ciudad(String nombre_ciudad) {
-        this.nombre_ciudad = nombre_ciudad;
+    public void setIdciudad(Integer idciudad) {
+        this.idciudad = idciudad;
     }
 
-    public Integer getId_pais() {
-        return id_pais;
+    public String getNombreciudad() {
+        return nombreciudad;
     }
 
-    public void setId_pais(Integer id_pais) {
-        this.id_pais = id_pais;
+    public void setNombreciudad(String nombreciudad) {
+        this.nombreciudad = nombreciudad;
     }
 
-    public Integer getValor_ciudad() {
-        return valor_ciudad;
+    public Integer getIdpais() {
+        return idpais;
     }
 
-    public void setValor_ciudad(Integer valor_ciudad) {
-        this.valor_ciudad = valor_ciudad;
+    public void setIdpais(Integer idpais) {
+        this.idpais = idpais;
+    }
+
+    public Integer getValorciudad() {
+        return valorciudad;
+    }
+
+    public void setValorciudad(Integer valorciudad) {
+        this.valorciudad = valorciudad;
+
     }
 }
