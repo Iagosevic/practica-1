@@ -12,3 +12,4 @@ public interface ICiudadRepository extends JpaRepository<CiudadEntity,Integer> {
     CiudadEntity findByNombreciudad(String nombreciudad);
 
 }
+

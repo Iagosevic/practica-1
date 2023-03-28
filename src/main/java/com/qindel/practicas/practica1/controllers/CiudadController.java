@@ -5,6 +5,7 @@ import com.qindel.practicas.practica1.repositories.ICiudadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -29,4 +30,5 @@ public class CiudadController {
         System.out.println("aaaaaaaaaaaaaaaaaaaa"+nombreciudad);
         return ciudadRepo.findByNombreciudad(nombreciudad);
     }*/
+
 }
