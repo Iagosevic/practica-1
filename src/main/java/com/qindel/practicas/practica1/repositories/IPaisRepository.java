@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IPaisRepository extends JpaRepository<PaisEntity, Integer> {
 
-    PaisEntity findByIdpais(Integer idpais);
-    PaisEntity findByNombrepais(String nombrepais);
+    /*PaisEntity findByIdpais(Integer idpais);
+    PaisEntity findByNombrepais(String nombrepais);*/
 
 }

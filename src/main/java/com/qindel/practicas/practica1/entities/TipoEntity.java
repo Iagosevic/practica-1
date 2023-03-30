@@ -3,15 +3,14 @@ package com.qindel.practicas.practica1.entities;
 import jakarta.persistence.*;
 
 @Entity
-@IdClass(TipoIDEntity.class)
 @Table(name="tipo_jjoo")
 public class TipoEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_tipo_jjoo")
     private Integer idtipojjoo;
 
-    @Id
     @Column(name="descripcion_tipo")
     private String descripciontipo;
 
