@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ISedeRepository extends JpaRepository <SedeEntity, SedeIDEntity> {
-    SedeEntity findBySede(Integer sede);
-    List<SedeEntity> findByAnho(Integer anho);
+    /*SedeEntity findBySede(Integer sede);
+    List<SedeEntity> findByAnho(Integer anho);*/
 }

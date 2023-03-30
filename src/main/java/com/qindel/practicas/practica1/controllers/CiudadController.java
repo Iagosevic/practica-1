@@ -1,28 +1,29 @@
 package com.qindel.practicas.practica1.controllers;
 
 import com.qindel.practicas.practica1.entities.CiudadEntity;
-import com.qindel.practicas.practica1.repositories.ICiudadRepository;
+import com.qindel.practicas.practica1.services.ICiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ciudades")
 public class CiudadController {
 
     @Autowired
-    private ICiudadRepository ciudadRepo;
+    private ICiudadService ciudadServ;
 
     @GetMapping("")
     public List<CiudadEntity> getCiudades(){
-        return ciudadRepo.findAll();
+        return  ciudadServ.getAllCiudades();
     }
 
     @GetMapping("/{id-ciudad}")
-    public CiudadEntity getCiudadById(@PathVariable("id-ciudad") Integer idciudad){
-        return ciudadRepo.findByIdciudad(idciudad);
+    public Optional<CiudadEntity> getCiudadById(@PathVariable("id-ciudad") Integer idciudad){
+        return ciudadServ.getCiudadByIdCiudad(idciudad);
     }
 
 /*    @GetMapping("/ciudad/{nombre-ciudad}")

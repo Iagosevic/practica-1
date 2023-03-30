@@ -8,8 +8,8 @@ import java.util.List;
 @Repository
 public interface ICiudadRepository extends JpaRepository<CiudadEntity,Integer> {
 
-    CiudadEntity findByIdciudad(Integer idciudad);
-    CiudadEntity findByNombreciudad(String nombreciudad);
+/*    CiudadEntity findByIdciudad(Integer idciudad);
+    CiudadEntity findByNombreciudad(String nombreciudad);*/
 
 }
 
