@@ -25,7 +25,7 @@ public class CiudadController {
     public Optional<CiudadEntity> getCiudadById(@PathVariable("id-ciudad") Integer idciudad){
         return ciudadServ.getCiudadByIdCiudad(idciudad);
     }
-
+//sdf
 /*    @GetMapping("/ciudad/{nombre-ciudad}")
     public CiudadEntity getCiudadByNombre(@RequestParam("nombre-ciudad") String nombreciudad){
         System.out.println("aaaaaaaaaaaaaaaaaaaa"+nombreciudad);
