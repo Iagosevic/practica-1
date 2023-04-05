@@ -9,6 +9,5 @@ import java.util.Optional;
 public interface ICiudadService {
     public List<CiudadEntity> getAllCiudades();
     public Optional<CiudadEntity> getCiudadByIdCiudad(Integer idciudad);
-
     public CiudadDto getCiudad(Integer idciudad);
 }

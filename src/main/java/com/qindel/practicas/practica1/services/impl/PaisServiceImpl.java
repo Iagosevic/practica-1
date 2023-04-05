@@ -1,7 +1,10 @@
 package com.qindel.practicas.practica1.services.impl;
 
+import com.qindel.practicas.practica1.apirest.CiudadDto;
+import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.entities.CiudadEntity;
 import com.qindel.practicas.practica1.entities.PaisEntity;
+import com.qindel.practicas.practica1.mappers.IPaisMapper;
 import com.qindel.practicas.practica1.repositories.ICiudadRepository;
 import com.qindel.practicas.practica1.repositories.IPaisRepository;
 import com.qindel.practicas.practica1.services.ICiudadService;
@@ -15,12 +18,22 @@ import java.util.Optional;
 @Service
 public class PaisServiceImpl implements IPaisService {
 
-    @Autowired
     private IPaisRepository paisRepo;
+    private IPaisMapper paisMap;
+
+    public PaisServiceImpl(IPaisRepository paisRepo, IPaisMapper paisMap) {
+        this.paisRepo = paisRepo;
+        this.paisMap = paisMap;
+    }
 
     @Override
     public List<PaisEntity> getAllPaises(){
         return paisRepo.findAll();
+    }
+
+    @Override
+    public PaisDto getPais(Integer idpais) {
+        return paisMap.toDto(paisRepo.getReferenceById(idpais));
     }
 
     @Override
