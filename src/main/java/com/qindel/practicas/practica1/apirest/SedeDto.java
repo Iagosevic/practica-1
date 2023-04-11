@@ -1,8 +1,5 @@
 package com.qindel.practicas.practica1.apirest;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-
 public class SedeDto {
 
     private Integer anho;

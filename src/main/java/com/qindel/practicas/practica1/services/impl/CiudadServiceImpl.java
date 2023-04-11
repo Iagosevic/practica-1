@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CiudadServiceImpl implements ICiudadService {
@@ -30,10 +29,4 @@ public class CiudadServiceImpl implements ICiudadService {
     public CiudadDto getCiudadByIdCiudad(Integer idciudad) {
         return ciudadMapper.toDto(ciudadRepository.getReferenceById(idciudad));
     }
-
-   /* @Override
-    public Optional<CiudadEntity> getCiudadByIdCiudad(Integer idciudad){
-        return ciudadRepo.findById(idciudad);
-    }
-*/
 }

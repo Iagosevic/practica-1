@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TipoServiceImpl implements ITipoService {
@@ -31,8 +30,4 @@ public class TipoServiceImpl implements ITipoService {
     public TipoDto getTipoById(Integer idtipojjoo){
         return tipoMapper.toDto(tipoRepository.getReferenceById(idtipojjoo));
     }
-    /*@Override
-    public Optional<TipoEntity> getTipoById(Integer idtipojjoo){
-        return tipoRepository.findById(idtipojjoo);
-    }
-*/}
+}

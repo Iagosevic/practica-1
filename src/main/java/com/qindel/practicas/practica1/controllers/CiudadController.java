@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/ciudades")
@@ -21,21 +20,9 @@ public class CiudadController {
     public List<CiudadEntity> getCiudades(){
         return  ciudadService.getAllCiudades();
     }
-
     @GetMapping("/{id-ciudad}")
     public CiudadDto getCiudadByIdCiudad(@PathVariable("id-ciudad") Integer idciudad){
         return ciudadService.getCiudadByIdCiudad(idciudad);
     }
-
-    /*@GetMapping("/{id-ciudad}")
-    public Optional<CiudadEntity> getCiudadById(@PathVariable("id-ciudad") Integer idciudad){
-        return ciudadServ.getCiudadByIdCiudad(idciudad);
-    }*/
-
-/*    @GetMapping("/ciudad/{nombre-ciudad}")
-    public CiudadEntity getCiudadByNombre(@RequestParam("nombre-ciudad") String nombreciudad){
-        System.out.println("aaaaaaaaaaaaaaaaaaaa"+nombreciudad);
-        return ciudadRepo.findByNombreciudad(nombreciudad);
-    }*/
 
 }

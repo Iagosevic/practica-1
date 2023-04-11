@@ -1,8 +1,6 @@
 package com.qindel.practicas.practica1.mapper;
 
-import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.apirest.SedeDto;
-import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.entities.SedeEntity;
 import org.mapstruct.Mapper;
 

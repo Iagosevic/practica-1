@@ -1,8 +1,6 @@
 package com.qindel.practicas.practica1.entities;
 
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "ciudad")
@@ -60,6 +58,5 @@ public class CiudadEntity {
 
     public void setValorciudad(Integer valorciudad) {
         this.valorciudad = valorciudad;
-
     }
 }

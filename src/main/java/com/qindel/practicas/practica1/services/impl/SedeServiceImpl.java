@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SedeServiceImpl implements ISedeService {
@@ -32,8 +31,4 @@ public class SedeServiceImpl implements ISedeService {
         SedeIDEntity claveSede = new SedeIDEntity(anho, idtipojjoo);
         return sedeMapper.toDto(sedeRepository.getReferenceById(claveSede));
     }
-    /*public Optional<SedeEntity> getSedeById(Integer anho, Integer idtipojjoo){
-        SedeIDEntity claveSede = new SedeIDEntity(anho, idtipojjoo);
-        return sedeRepository.findById(claveSede);
-    }*/
 }
