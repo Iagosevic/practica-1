@@ -1,5 +1,6 @@
 package com.qindel.practicas.practica1.controllers;
 
+import com.qindel.practicas.practica1.apirest.TipoDto;
 import com.qindel.practicas.practica1.entities.TipoEntity;
 import com.qindel.practicas.practica1.services.ITipoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,22 @@ import java.util.Optional;
 public class TipoController {
 
     @Autowired
-    private ITipoService tipoServ;
+    private ITipoService tipoService;
 
     @GetMapping("")
     public List<TipoEntity> getTipos(){
-        return tipoServ.getAllTipos();
+        return tipoService.getAllTipos();
     }
 
     @GetMapping("/{id-tipo-jjoo}")
+    public TipoDto getTipoById(@PathVariable("id-tipo-jjoo") Integer idtipojjoo){
+        return tipoService.getTipoById(idtipojjoo);
+    }
+
+    /*@GetMapping("/{id-tipo-jjoo}")
     public Optional<TipoEntity> getTipoById(@PathVariable("id-tipo-jjoo") Integer idtipojjoo){
         return tipoServ.getTipoById(idtipojjoo);
-    }
+    }*/
 
    /* @GetMapping("/tipo/{descripcion-tipo}")
     public TipoEntity getTipoByDescripcion(@PathVariable("descripcion-tipo") String descripciontipo){

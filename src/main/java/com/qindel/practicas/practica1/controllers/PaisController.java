@@ -1,5 +1,6 @@
 package com.qindel.practicas.practica1.controllers;
 
+import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.entities.CiudadEntity;
 import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.repositories.IPaisRepository;
@@ -19,17 +20,21 @@ import java.util.Optional;
 public class PaisController {
 
     @Autowired
-    private IPaisService paisServ;
+    private IPaisService paisService;
 
     @GetMapping("")
     public List<PaisEntity> getPaises(){
-        return paisServ.getAllPaises();
+        return paisService.getAllPaises();
+    }
+    @GetMapping("/{id-pais}")
+    public PaisDto getpaisById(@PathVariable("id-pais") Integer idpais){
+        return paisService.getPaisByIdPais(idpais);
     }
 
-    @GetMapping("/{id-pais}")
+    /*@GetMapping("/{id-pais}")
     public Optional<PaisEntity> getpaisById(@PathVariable("id-pais") Integer idpais){
         return paisServ.getPaisByIdPais(idpais);
-    }
+    }*/
 
  /*   @GetMapping("/pais/{nombre-pais}")
     public PaisEntity getpaisByNombre(@PathVariable String nombrepais){

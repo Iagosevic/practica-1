@@ -1,7 +1,9 @@
 package com.qindel.practicas.practica1.services.impl;
 
+import com.qindel.practicas.practica1.apirest.SedeDto;
 import com.qindel.practicas.practica1.entities.SedeEntity;
 import com.qindel.practicas.practica1.entities.SedeIDEntity;
+import com.qindel.practicas.practica1.mapper.ISedeMapper;
 import com.qindel.practicas.practica1.repositories.ISedeRepository;
 import com.qindel.practicas.practica1.services.ISedeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +14,26 @@ import java.util.Optional;
 
 @Service
 public class SedeServiceImpl implements ISedeService {
+
+    private ISedeRepository sedeRepository;
+    private ISedeMapper sedeMapper;
     @Autowired
-    private ISedeRepository sedeRepo;
+    public SedeServiceImpl(ISedeRepository sedeRepository, ISedeMapper sedeMapper) {
+        this.sedeRepository = sedeRepository;
+        this.sedeMapper = sedeMapper;
+    }
 
     @Override
     public List<SedeEntity> getAllSedes(){
-        return sedeRepo.findAll();
+        return sedeRepository.findAll();
     }
-    public Optional<SedeEntity> getSedeById(Integer anho, Integer idtipojjoo){
-        System.out.println("HOlaaaaaaaaaaaaaa");
+    @Override
+    public SedeDto getSedeById(Integer anho, Integer idtipojjoo){
         SedeIDEntity claveSede = new SedeIDEntity(anho, idtipojjoo);
-        return sedeRepo.findById(claveSede);
+        return sedeMapper.toDto(sedeRepository.getReferenceById(claveSede));
     }
+    /*public Optional<SedeEntity> getSedeById(Integer anho, Integer idtipojjoo){
+        SedeIDEntity claveSede = new SedeIDEntity(anho, idtipojjoo);
+        return sedeRepository.findById(claveSede);
+    }*/
 }
