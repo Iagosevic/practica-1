@@ -1,24 +1,14 @@
-package com.qindel.practicas.practica1.entities;
+package com.qindel.practicas.practica1.apirest;
 
-import jakarta.persistence.*;
+public class TipoDto {
 
-@Entity
-@Table(name="tipo_jjoo")
-public class TipoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_tipo_jjoo")
     private Integer idtipojjoo;
-    @Column(name="descripcion_tipo")
     private String descripciontipo;
-    public TipoEntity() {
-    }
 
-    public TipoEntity(Integer idtipojjoo, String descripciontipo) {
+    public TipoDto(Integer idtipojjoo, String descripciontipo) {
         this.idtipojjoo = idtipojjoo;
         this.descripciontipo = descripciontipo;
     }
-
     public Integer getIdtipojjoo() {
         return idtipojjoo;
     }

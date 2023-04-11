@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SedeIDEntity implements Serializable {
-
     private Integer anho;
     private Integer idtipojjoo;
-
     public SedeIDEntity() {
 
     }
-
     public SedeIDEntity(Integer anho, Integer idtipojjoo) {
         super();
         this.anho = anho;
@@ -32,19 +29,15 @@ public class SedeIDEntity implements Serializable {
         SedeIDEntity other = (SedeIDEntity) obj;
         return Objects.equals(anho, other.anho) && Objects.equals(idtipojjoo, other.idtipojjoo);
     }
-
     public Integer getAnho() {
         return anho;
     }
-
     public void setAnho(Integer anho) {
         this.anho = anho;
     }
-
     public Integer getIdtipojjoo() {
         return idtipojjoo;
     }
-
     public void setIdtipojjoo(Integer idtipojjoo) {
         this.idtipojjoo = idtipojjoo;
     }

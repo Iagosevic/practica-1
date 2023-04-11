@@ -1,29 +1,15 @@
-package com.qindel.practicas.practica1.entities;
+package com.qindel.practicas.practica1.apirest;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "pais")
-public class PaisEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_pais")
+public class PaisDto {
     private Integer idpais;
-    @Column(name = "nombre_pais")
     private String nombrepais;
-    @Column(name = "codigo_pais")
     private String codigopais;
-    @Column(name = "valor_pais")
     private Integer valorpais;
-
-    public PaisEntity(Integer idpais, String nombrepais, String codigopais, Integer valorpais) {
+    public PaisDto(Integer idpais, String nombrepais, String codigopais, Integer valorpais) {
         this.idpais = idpais;
         this.nombrepais = nombrepais;
         this.codigopais = codigopais;
         this.valorpais = valorpais;
-    }
-
-    public PaisEntity() {
     }
     public Integer getIdpais() {
         return idpais;
