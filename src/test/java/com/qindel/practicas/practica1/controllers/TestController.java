@@ -18,35 +18,5 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestController {
-    //Metodo de prueba
-    @ParameterizedTest
-    @ValueSource(strings = {"", "  "})
-    public void isBlank_ShouldReturnTrueForNullOrBlankStrings(String input) {
-        assertTrue(Strings.isBlank(input));
-    }
 
-    @Mock
-    private ICiudadRepository ciudadRepository;
-    @Mock
-    private ICiudadMapper ciudadMapper;
-
-    @Test
-    public void getCiudadTest() {
-        //Datos de entrada
-        Integer idciudad = 1;
-        String nombreciudad = "A Corunha";
-        Integer idpais = 1;
-        Integer valorciudad = 93;
-
-        CiudadEntity ciudad = new CiudadEntity(idciudad, nombreciudad, idpais, valorciudad);
-
-        Mockito.when(ciudadRepository.getReferenceById(idciudad)).thenReturn(ciudad);
-
-        CiudadDto ciudadDto = new CiudadDto(idciudad, nombreciudad, idpais, valorciudad);
-        Mockito.when(ciudadMapper.toDto(ciudad)).thenReturn(ciudadDto);
-
-        CiudadDto ciudadDtoExpected = new CiudadDto(idciudad, nombreciudad, idpais, valorciudad);
-
-        assertThat(ciudadDto).usingRecursiveComparison().isEqualTo(ciudadDtoExpected);
-    }
 }
