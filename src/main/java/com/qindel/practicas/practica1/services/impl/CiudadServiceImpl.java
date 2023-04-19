@@ -29,4 +29,9 @@ public class CiudadServiceImpl implements ICiudadService {
     public CiudadDto getCiudadByIdCiudad(Integer idciudad) {
         return ciudadMapper.toDto(ciudadRepository.getReferenceById(idciudad));
     }
+
+    @Override
+    public CiudadDto addCiudad(CiudadDto ciudad) {
+        return ciudadMapper.toDto(ciudadRepository.save(ciudadMapper.toEntity(ciudad)));
+    }
 }

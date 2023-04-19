@@ -8,4 +8,5 @@ import java.util.List;
 public interface ICiudadService {
     public List<CiudadEntity> getAllCiudades();
     public CiudadDto getCiudadByIdCiudad(Integer idciudad);
+    public CiudadDto addCiudad(CiudadDto ciudad);
 }
