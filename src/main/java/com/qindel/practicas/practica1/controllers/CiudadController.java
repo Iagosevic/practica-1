@@ -17,7 +17,7 @@ public class CiudadController {
     private ICiudadService ciudadService;
 
     @GetMapping("")
-    public List<CiudadEntity> getCiudades(){
+    public List<CiudadDto> getCiudades(){
         return  ciudadService.getAllCiudades();
     }
     @GetMapping("/{id-ciudad}")

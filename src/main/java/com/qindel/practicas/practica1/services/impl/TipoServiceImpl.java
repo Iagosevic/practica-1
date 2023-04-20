@@ -1,6 +1,8 @@
 package com.qindel.practicas.practica1.services.impl;
 
+import com.qindel.practicas.practica1.apirest.SedeDto;
 import com.qindel.practicas.practica1.apirest.TipoDto;
+import com.qindel.practicas.practica1.entities.SedeEntity;
 import com.qindel.practicas.practica1.entities.TipoEntity;
 import com.qindel.practicas.practica1.mapper.ITipoMapper;
 import com.qindel.practicas.practica1.repositories.ITipoRepository;
@@ -8,6 +10,7 @@ import com.qindel.practicas.practica1.services.ITipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +25,14 @@ public class TipoServiceImpl implements ITipoService {
     }
 
     @Override
-    public List<TipoEntity> getAllTipos(){
-        return tipoRepository.findAll();
+    public List<TipoDto> getAllTipos(){
+        List<TipoEntity> tiposEntity = new ArrayList<TipoEntity>();
+        List<TipoDto> tiposDto = new ArrayList<TipoDto>();
+        tipoRepository.findAll().forEach(tiposEntity::add);
+        for (int i = 0; i < tiposEntity.size(); i++){
+            tiposDto.add(tipoMapper.toDto(tiposEntity.get(i)));
+        }
+        return tiposDto;
     }
 
     @Override

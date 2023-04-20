@@ -19,7 +19,7 @@ public class TipoController {
     private ITipoService tipoService;
 
     @GetMapping("")
-    public List<TipoEntity> getTipos(){
+    public List<TipoDto> getTipos(){
         return tipoService.getAllTipos();
     }
     @GetMapping("/{id-tipo-jjoo}")

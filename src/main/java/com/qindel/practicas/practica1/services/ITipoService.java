@@ -6,6 +6,6 @@ import com.qindel.practicas.practica1.entities.TipoEntity;
 import java.util.List;
 
 public interface ITipoService {
-    public List<TipoEntity> getAllTipos();
+    public List<TipoDto> getAllTipos();
     public TipoDto getTipoById(Integer idtipojjoo);
 }

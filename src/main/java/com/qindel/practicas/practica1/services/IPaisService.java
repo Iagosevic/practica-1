@@ -6,6 +6,6 @@ import com.qindel.practicas.practica1.entities.PaisEntity;
 import java.util.List;
 
 public interface IPaisService {
-    public List<PaisEntity> getAllPaises();
+    public List<PaisDto> getAllPaises();
     public PaisDto getPaisByIdPais(Integer idpais);
 }

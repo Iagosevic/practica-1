@@ -8,6 +8,7 @@ import com.qindel.practicas.practica1.services.ICiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +23,14 @@ public class CiudadServiceImpl implements ICiudadService {
     }
 
     @Override
-    public List<CiudadEntity> getAllCiudades(){
-        return ciudadRepository.findAll();
+    public List<CiudadDto> getAllCiudades(){
+        List<CiudadEntity> ciudadesEntity = new ArrayList<CiudadEntity>();
+        List<CiudadDto> ciudadesDto = new ArrayList<CiudadDto>();
+        ciudadRepository.findAll().forEach(ciudadesEntity::add);
+        for (int i = 0; i < ciudadesEntity.size(); i++){
+            ciudadesDto.add(ciudadMapper.toDto(ciudadesEntity.get(i)));
+        }
+        return ciudadesDto;
     }
     @Override
     public CiudadDto getCiudadByIdCiudad(Integer idciudad) {

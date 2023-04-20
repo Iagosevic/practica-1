@@ -1,6 +1,8 @@
 package com.qindel.practicas.practica1.services.impl;
 
+import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.apirest.SedeDto;
+import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.entities.SedeEntity;
 import com.qindel.practicas.practica1.entities.SedeIDEntity;
 import com.qindel.practicas.practica1.mapper.ISedeMapper;
@@ -9,6 +11,7 @@ import com.qindel.practicas.practica1.services.ISedeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,8 +26,14 @@ public class SedeServiceImpl implements ISedeService {
     }
 
     @Override
-    public List<SedeEntity> getAllSedes(){
-        return sedeRepository.findAll();
+    public List<SedeDto> getAllSedes(){
+        List<SedeEntity> sedesEntity = new ArrayList<SedeEntity>();
+        List<SedeDto> sedesDto = new ArrayList<SedeDto>();
+        sedeRepository.findAll().forEach(sedesEntity::add);
+        for (int i = 0; i < sedesEntity.size(); i++){
+            sedesDto.add(sedeMapper.toDto(sedesEntity.get(i)));
+        }
+        return sedesDto;
     }
     @Override
     public SedeDto getSedeById(Integer anho, Integer idtipojjoo){

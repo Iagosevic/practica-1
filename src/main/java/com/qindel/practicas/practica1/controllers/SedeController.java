@@ -19,7 +19,7 @@ public class SedeController {
     private ISedeService sedeService;
 
     @GetMapping("")
-    public List<SedeEntity> getSedes() {
+    public List<SedeDto> getSedes() {
         return sedeService.getAllSedes();
     }
     @GetMapping("/anho/{anho}/idtipojjoo/{idtipojjoo}")
