@@ -39,4 +39,23 @@ public class TipoServiceImpl implements ITipoService {
     public TipoDto getTipoById(Integer idtipojjoo){
         return tipoMapper.toDto(tipoRepository.getReferenceById(idtipojjoo));
     }
+
+    @Override
+    public TipoDto addTipo(TipoDto tipo) {
+        return tipoMapper.toDto(tipoRepository.save(tipoMapper.toEntity(tipo)));
+    }
+
+    public TipoDto updateTipo(TipoDto tipoJJOODto, Integer id_tipo_jjoo) {
+        TipoEntity newTipoJJOO = tipoMapper.toEntity(tipoJJOODto);
+        return tipoMapper.toDto(tipoRepository.findById(id_tipo_jjoo)
+                .map(tipo -> {
+                    tipo.setIdtipojjoo(newTipoJJOO.getIdtipojjoo());
+                    tipo.setDescripciontipo(newTipoJJOO.getDescripciontipo());
+                    return tipoRepository.save(tipo);
+                }).orElseGet(() -> {
+                    newTipoJJOO.setIdtipojjoo(id_tipo_jjoo);
+                    return tipoRepository.save(newTipoJJOO);
+                })
+        );
+    }
 }

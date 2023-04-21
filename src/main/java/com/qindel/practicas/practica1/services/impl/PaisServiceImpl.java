@@ -40,4 +40,9 @@ public class PaisServiceImpl implements IPaisService {
     public PaisDto getPaisByIdPais(Integer idpais) {
         return paisMapper.toDto(paisRepository.getReferenceById(idpais));
     }
+
+    @Override
+    public PaisDto addPais(PaisDto pais) {
+        return paisMapper.toDto(paisRepository.save(paisMapper.toEntity(pais)));
+    }
 }
