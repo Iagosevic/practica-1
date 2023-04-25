@@ -4,23 +4,25 @@ import com.qindel.practicas.practica1.apirest.TipoDto;
 import com.qindel.practicas.practica1.entities.TipoEntity;
 import com.qindel.practicas.practica1.mapper.ITipoMapper;
 import com.qindel.practicas.practica1.repositories.ITipoRepository;
+import com.qindel.practicas.practica1.services.impl.TipoServiceImpl;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.times;
-
+@SpringBootTest
 public class TipoServiceImplTest {
     @Mock
     private ITipoRepository tipoRepository;
 
     @InjectMocks
-    private ITipoService tipoService;
+    private TipoServiceImpl tipoService;
 
     @Mock
     private ITipoMapper tipoMapper;

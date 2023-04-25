@@ -5,23 +5,26 @@ import com.qindel.practicas.practica1.entities.SedeEntity;
 import com.qindel.practicas.practica1.entities.SedeIDEntity;
 import com.qindel.practicas.practica1.mapper.ISedeMapper;
 import com.qindel.practicas.practica1.repositories.ISedeRepository;
+import com.qindel.practicas.practica1.services.impl.SedeServiceImpl;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.times;
 
+@SpringBootTest
 public class SedesServiceImplTest {
     @Mock
     private ISedeRepository sedeRepository;
 
     @InjectMocks
-    private ISedeService sedeService;
+    private SedeServiceImpl sedeService;
 
     @Mock
     private ISedeMapper sedeMapper;

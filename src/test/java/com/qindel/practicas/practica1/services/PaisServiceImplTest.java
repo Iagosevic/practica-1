@@ -4,22 +4,24 @@ import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.mapper.IPaisMapper;
 import com.qindel.practicas.practica1.repositories.IPaisRepository;
+import com.qindel.practicas.practica1.services.impl.PaisServiceImpl;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.times;
-
+@SpringBootTest
 public class PaisServiceImplTest {
     @Mock
     private IPaisRepository paisRepository;
 
     @InjectMocks
-    private IPaisService paisService;
+    private PaisServiceImpl paisService;
 
     @Mock
     private IPaisMapper paisMapper;

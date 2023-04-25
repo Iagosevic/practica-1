@@ -4,22 +4,24 @@ import com.qindel.practicas.practica1.apirest.CiudadDto;
 import com.qindel.practicas.practica1.entities.CiudadEntity;
 import com.qindel.practicas.practica1.mapper.ICiudadMapper;
 import com.qindel.practicas.practica1.repositories.ICiudadRepository;
+import com.qindel.practicas.practica1.services.impl.CiudadServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.times;
-
+@SpringBootTest
 public class CiudadServiceImplTest {
     @Mock
-    private ICiudadRepository mockCiudadRepository;
+    private ICiudadRepository ciudadRepository;
 
     @InjectMocks
-    private ICiudadService ciudadService;
+    private CiudadServiceImpl ciudadService;
 
     @Mock
     private ICiudadMapper ciudadMapper;
@@ -34,14 +36,14 @@ public class CiudadServiceImplTest {
 
         CiudadEntity ciudad = new CiudadEntity(id_ciudad,nombre_ciudad,id_pais,valor_ciudad);
 
-        Mockito.when(mockCiudadRepository.getReferenceById(id_ciudad)).thenReturn(ciudad);
+        Mockito.when(ciudadRepository.getReferenceById(id_ciudad)).thenReturn(ciudad);
 
         CiudadDto ciudadDto =  new CiudadDto(id_ciudad,nombre_ciudad,id_pais,valor_ciudad);
         Mockito.when(ciudadMapper.toDto(ciudad)).thenReturn(ciudadDto);
 
         CiudadDto ciudadDtoExpected = ciudadService.getCiudadByIdCiudad(id_ciudad);
 
-        Mockito.verify(mockCiudadRepository, times(1)).getReferenceById(id_ciudad);
+        Mockito.verify(ciudadRepository, times(1)).getReferenceById(id_ciudad);
         assertThat(ciudadDto).usingRecursiveComparison().isEqualTo(ciudadDtoExpected);
 
     }
@@ -54,14 +56,14 @@ public class CiudadServiceImplTest {
         Integer valor_ciudad = Integer.parseInt(valor_ciudadString);
 
         CiudadEntity ciudad = new CiudadEntity(id_ciudad, nombre_ciudad, id_pais, valor_ciudad);
-        Mockito.when(mockCiudadRepository.save(ciudad)).thenReturn(ciudad);
+        Mockito.when(ciudadRepository.save(ciudad)).thenReturn(ciudad);
 
         CiudadDto ciudadDto = new CiudadDto(id_ciudad, nombre_ciudad, id_pais, valor_ciudad);
         Mockito.when(ciudadMapper.toDto(ciudad)).thenReturn(ciudadDto);
         Mockito.when(ciudadMapper.toEntity(ciudadDto)).thenReturn(ciudad);
 
         CiudadDto ciudadDtoExpected = ciudadService.addCiudad(ciudadDto);
-        Mockito.verify(mockCiudadRepository, times(1)).save(ciudad);
+        Mockito.verify(ciudadRepository, times(1)).save(ciudad);
         assertThat(ciudadDto).usingRecursiveComparison().isEqualTo(ciudadDtoExpected);
     }
 
@@ -69,16 +71,16 @@ public class CiudadServiceImplTest {
     @CsvSource({"14,Elche,1,309"})
     public CiudadDto updateCiudad(CiudadDto ciudadDto, Integer idCiudad) {
         CiudadEntity newCiudad = ciudadMapper.toEntity(ciudadDto);
-        return ciudadMapper.toDto(mockCiudadRepository.findById(idCiudad)
+        return ciudadMapper.toDto(ciudadRepository.findById(idCiudad)
                 .map(ciudad -> {
                     ciudad.setIdciudad(newCiudad.getIdciudad());
                     ciudad.setIdpais(newCiudad.getIdpais());
                     ciudad.setNombreciudad(newCiudad.getNombreciudad());
                     ciudad.setValorciudad(newCiudad.getValorciudad());
-                    return mockCiudadRepository.save(ciudad);
+                    return ciudadRepository.save(ciudad);
                 }).orElseGet(() -> {
                     newCiudad.setIdciudad(idCiudad);
-                    return mockCiudadRepository.save(newCiudad);
+                    return ciudadRepository.save(newCiudad);
                 })
         );
     }
