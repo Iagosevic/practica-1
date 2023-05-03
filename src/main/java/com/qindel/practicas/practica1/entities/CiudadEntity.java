@@ -2,6 +2,9 @@ package com.qindel.practicas.practica1.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "ciudad")
 public class CiudadEntity {
@@ -17,12 +20,15 @@ public class CiudadEntity {
     @Column(name = "valor_ciudad")
     private Integer valorciudad;
 
+
     public CiudadEntity(Integer idciudad, String nombreciudad, Integer idpais, Integer valorciudad) {
         this.idciudad = idciudad;
         this.nombreciudad = nombreciudad;
         this.idpais = idpais;
         this.valorciudad = valorciudad;
     }
+
+
 
     public CiudadEntity() {
 
@@ -59,4 +65,5 @@ public class CiudadEntity {
     public void setValorciudad(Integer valorciudad) {
         this.valorciudad = valorciudad;
     }
+
 }

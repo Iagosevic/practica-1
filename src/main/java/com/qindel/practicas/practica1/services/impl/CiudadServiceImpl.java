@@ -41,4 +41,24 @@ public class CiudadServiceImpl implements ICiudadService {
     public CiudadDto addCiudad(CiudadDto ciudad) {
         return ciudadMapper.toDto(ciudadRepository.save(ciudadMapper.toEntity(ciudad)));
     }
+    @Override
+    public CiudadDto updateCiudad(CiudadDto ciudadDto, Integer idciudad) {
+        CiudadEntity newCiudad = ciudadMapper.toEntity(ciudadDto);
+        return ciudadMapper.toDto(ciudadRepository.findById(idciudad)
+                .map(ciudad -> {
+                    ciudad.setIdciudad(newCiudad.getIdciudad());
+                    ciudad.setIdpais(newCiudad.getIdpais());
+                    ciudad.setNombreciudad(newCiudad.getNombreciudad());
+                    ciudad.setValorciudad(newCiudad.getValorciudad());
+                    return ciudadRepository.save(ciudad);
+                }).orElseGet(() -> {
+                    newCiudad.setIdciudad(idciudad);
+                    return ciudadRepository.save(newCiudad);
+                })
+        );
+    }
+    @Override
+    public void deleteCiudad(Integer idciudad) {
+        ciudadRepository.deleteById(idciudad);
+    }
 }

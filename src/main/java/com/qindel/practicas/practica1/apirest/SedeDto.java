@@ -14,6 +14,10 @@ public class SedeDto {
         this.sede = sede;
     }
 
+    public SedeDto() {
+
+    }
+
     public Integer getAnho() {
         return anho;
     }
