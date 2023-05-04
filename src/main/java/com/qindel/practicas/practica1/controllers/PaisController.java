@@ -20,7 +20,7 @@ public class PaisController {
     private IPaisService paisService;
 
     @GetMapping("")
-    public List<PaisEntity> getPaises(){
+    public List<PaisDto> getPaises(){
         return paisService.getAllPaises();
     }
     @GetMapping("/{id-pais}")

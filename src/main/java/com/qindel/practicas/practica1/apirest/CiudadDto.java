@@ -12,6 +12,11 @@ public class CiudadDto {
         this.idpais = idpais;
         this.valorciudad = valorciudad;
     }
+
+    public CiudadDto() {
+
+    }
+
     public Integer getIdciudad() {
         return idciudad;
     }

@@ -8,6 +8,7 @@ import com.qindel.practicas.practica1.services.ICiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,11 +23,42 @@ public class CiudadServiceImpl implements ICiudadService {
     }
 
     @Override
-    public List<CiudadEntity> getAllCiudades(){
-        return ciudadRepository.findAll();
+    public List<CiudadDto> getAllCiudades(){
+        List<CiudadEntity> ciudadesEntity = new ArrayList<CiudadEntity>();
+        List<CiudadDto> ciudadesDto = new ArrayList<CiudadDto>();
+        ciudadRepository.findAll().forEach(ciudadesEntity::add);
+        for (int i = 0; i < ciudadesEntity.size(); i++){
+            ciudadesDto.add(ciudadMapper.toDto(ciudadesEntity.get(i)));
+        }
+        return ciudadesDto;
     }
     @Override
     public CiudadDto getCiudadByIdCiudad(Integer idciudad) {
         return ciudadMapper.toDto(ciudadRepository.getReferenceById(idciudad));
+    }
+
+    @Override
+    public CiudadDto addCiudad(CiudadDto ciudad) {
+        return ciudadMapper.toDto(ciudadRepository.save(ciudadMapper.toEntity(ciudad)));
+    }
+    @Override
+    public CiudadDto updateCiudad(CiudadDto ciudadDto, Integer idciudad) {
+        CiudadEntity newCiudad = ciudadMapper.toEntity(ciudadDto);
+        return ciudadMapper.toDto(ciudadRepository.findById(idciudad)
+                .map(ciudad -> {
+                    ciudad.setIdciudad(newCiudad.getIdciudad());
+                    ciudad.setIdpais(newCiudad.getIdpais());
+                    ciudad.setNombreciudad(newCiudad.getNombreciudad());
+                    ciudad.setValorciudad(newCiudad.getValorciudad());
+                    return ciudadRepository.save(ciudad);
+                }).orElseGet(() -> {
+                    newCiudad.setIdciudad(idciudad);
+                    return ciudadRepository.save(newCiudad);
+                })
+        );
+    }
+    @Override
+    public void deleteCiudad(Integer idciudad) {
+        ciudadRepository.deleteById(idciudad);
     }
 }

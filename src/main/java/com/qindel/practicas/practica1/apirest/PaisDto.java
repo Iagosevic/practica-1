@@ -11,6 +11,11 @@ public class PaisDto {
         this.codigopais = codigopais;
         this.valorpais = valorpais;
     }
+
+    public PaisDto() {
+
+    }
+
     public Integer getIdpais() {
         return idpais;
     }

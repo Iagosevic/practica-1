@@ -9,6 +9,11 @@ public class TipoDto {
         this.idtipojjoo = idtipojjoo;
         this.descripciontipo = descripciontipo;
     }
+
+    public TipoDto() {
+
+    }
+
     public Integer getIdtipojjoo() {
         return idtipojjoo;
     }
