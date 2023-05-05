@@ -1,13 +1,11 @@
 package com.qindel.practicas.practica1.controllers;
 
 import com.qindel.practicas.practica1.apirest.TipoDto;
+import com.qindel.practicas.practica1.apirest.TipoDto;
 import com.qindel.practicas.practica1.entities.TipoEntity;
 import com.qindel.practicas.practica1.services.ITipoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,22 @@ public class TipoController {
     @GetMapping("/{id-tipo-jjoo}")
     public TipoDto getTipoById(@PathVariable("id-tipo-jjoo") Integer idtipojjoo){
         return tipoService.getTipoById(idtipojjoo);
+    }
+    @PostMapping("/tipo")
+    public TipoDto addTipo(@RequestBody TipoDto nuevoTipo) {
+        return tipoService.addTipo(nuevoTipo);
+    }
+    @PutMapping("/{idtipo}}")
+    public TipoDto updateTipo(@PathVariable Integer idtipo, @RequestBody TipoDto nuevoTipo) {
+        TipoDto tipoEditar = tipoService.getTipoById(idtipo);
+
+        tipoEditar.setDescripciontipo(nuevoTipo.getDescripciontipo());
+
+        return tipoService.addTipo(tipoEditar);
+    }
+
+    @DeleteMapping("/{idtipo}}")
+    public void deleteTipo(@PathVariable Integer idtipo) {
+        tipoService.deleteTipo(idtipo);
     }
 }

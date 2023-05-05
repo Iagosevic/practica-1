@@ -9,4 +9,6 @@ public interface IPaisService {
     public List<PaisDto> getAllPaises();
     public PaisDto getPaisByIdPais(Integer idpais);
     public PaisDto addPais(PaisDto paisDto);
+    public PaisDto updatePais(PaisDto pais, Integer idpais);
+    public void deletePais(Integer idpais);
 }

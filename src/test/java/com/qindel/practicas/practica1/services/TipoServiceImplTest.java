@@ -12,6 +12,7 @@ import com.qindel.practicas.practica1.services.impl.TipoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -135,5 +136,12 @@ public class TipoServiceImplTest {
         Mockito.verify(tipoRepository, times(1)).findById(id_tipo_jjoo);
         Mockito.verify(tipoRepository, times(1)).save(tipoJJOONew);
         assertThat(tipoJJOODtoNew).isEqualTo(tipoJJOODtoNewExpected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, Integer.MAX_VALUE})
+    public void deleteTipoTest(int id) throws Exception {
+        tipoService.deleteTipo(id);
+        Mockito.verify(tipoRepository).deleteById(id);
     }
 }

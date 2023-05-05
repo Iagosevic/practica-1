@@ -1,8 +1,6 @@
 package com.qindel.practicas.practica1.services.impl;
 
-import com.qindel.practicas.practica1.apirest.CiudadDto;
 import com.qindel.practicas.practica1.apirest.PaisDto;
-import com.qindel.practicas.practica1.entities.CiudadEntity;
 import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.mapper.IPaisMapper;
 import com.qindel.practicas.practica1.repositories.IPaisRepository;
@@ -45,4 +43,26 @@ public class PaisServiceImpl implements IPaisService {
     public PaisDto addPais(PaisDto pais) {
         return paisMapper.toDto(paisRepository.save(paisMapper.toEntity(pais)));
     }
+
+    @Override
+    public PaisDto updatePais(PaisDto paisDto, Integer idpais) {
+        PaisEntity newPais = paisMapper.toEntity(paisDto);
+        return paisMapper.toDto(paisRepository.findById(idpais)
+                .map(pais -> {
+                    pais.setIdpais(newPais.getIdpais());
+                    pais.setIdpais(newPais.getIdpais());
+                    pais.setNombrepais(newPais.getNombrepais());
+                    pais.setValorpais(newPais.getValorpais());
+                    return paisRepository.save(pais);
+                }).orElseGet(() -> {
+                    newPais.setIdpais(idpais);
+                    return paisRepository.save(newPais);
+                })
+        );
+    }
+    @Override
+    public void deletePais(Integer idpais) {
+        paisRepository.deleteById(idpais);
+    }
+    
 }

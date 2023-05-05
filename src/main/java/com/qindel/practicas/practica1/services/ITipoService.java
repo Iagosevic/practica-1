@@ -11,4 +11,5 @@ public interface ITipoService {
     public TipoDto getTipoById(Integer idtipojjoo);
     public TipoDto addTipo(TipoDto tipo);
     public TipoDto updateTipo(TipoDto tipoJJOODto, Integer id_tipo_jjoo);
+    public void deleteTipo(Integer id_tipo_jjoo);
 }

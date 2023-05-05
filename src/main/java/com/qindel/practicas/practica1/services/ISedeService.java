@@ -10,4 +10,5 @@ public interface ISedeService {
     public SedeDto getSedeById(Integer anho, Integer idtipojjoo);
     public SedeDto addSede(SedeDto sede);
     public SedeDto updateSede(SedeDto sedeJJOODto, Integer anno, Integer id_tipo_jjoo);
+    public void deleteSede(Integer anno, Integer id_tipo_jjoo);
 }

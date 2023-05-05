@@ -45,7 +45,7 @@ public class SedeServiceImpl implements ISedeService {
     public SedeDto addSede(SedeDto sede) {
         return sedeMapper.toDto(sedeRepository.save(sedeMapper.toEntity(sede)));
     }
-
+    @Override
     public SedeDto updateSede(SedeDto sedeJJOODto, Integer anno, Integer id_tipo_jjoo) {
         SedeIDEntity sedeJJOOId = new SedeIDEntity(anno, id_tipo_jjoo);
         SedeEntity newSedeJJOO = sedeMapper.toEntity(sedeJJOODto);
@@ -61,5 +61,11 @@ public class SedeServiceImpl implements ISedeService {
                     return sedeRepository.save(newSedeJJOO);
                 })
         );
+    }
+    @Override
+    public void deleteSede(Integer anno, Integer id_tipo_jjoo){
+        SedeIDEntity sedeJJOOId = new SedeIDEntity(anno, id_tipo_jjoo);
+
+        sedeMapper.toDto(sedeRepository.deleteById(sedeJJOOId));
     }
 }

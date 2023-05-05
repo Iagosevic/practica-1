@@ -58,4 +58,9 @@ public class TipoServiceImpl implements ITipoService {
                 })
         );
     }
+
+    @Override
+    public void deleteTipo(Integer idTipo) {
+        tipoRepository.deleteById(idTipo);
+    }
 }
