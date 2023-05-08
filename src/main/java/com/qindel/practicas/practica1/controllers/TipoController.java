@@ -24,11 +24,11 @@ public class TipoController {
     public TipoDto getTipoById(@PathVariable("id-tipo-jjoo") Integer idtipojjoo){
         return tipoService.getTipoById(idtipojjoo);
     }
-    @PostMapping("/tipo")
+    @PostMapping("/addTipo")
     public TipoDto addTipo(@RequestBody TipoDto nuevoTipo) {
         return tipoService.addTipo(nuevoTipo);
     }
-    @PutMapping("/{idtipo}}")
+    @PutMapping("/editTipo/{idtipo}")
     public TipoDto updateTipo(@PathVariable Integer idtipo, @RequestBody TipoDto nuevoTipo) {
         TipoDto tipoEditar = tipoService.getTipoById(idtipo);
 
@@ -37,7 +37,7 @@ public class TipoController {
         return tipoService.addTipo(tipoEditar);
     }
 
-    @DeleteMapping("/{idtipo}}")
+    @DeleteMapping("/deleteTipo/{idtipo}")
     public void deleteTipo(@PathVariable Integer idtipo) {
         tipoService.deleteTipo(idtipo);
     }

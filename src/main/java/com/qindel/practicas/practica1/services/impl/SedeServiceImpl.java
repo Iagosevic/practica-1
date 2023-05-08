@@ -66,6 +66,6 @@ public class SedeServiceImpl implements ISedeService {
     public void deleteSede(Integer anno, Integer id_tipo_jjoo){
         SedeIDEntity sedeJJOOId = new SedeIDEntity(anno, id_tipo_jjoo);
 
-        sedeMapper.toDto(sedeRepository.deleteById(sedeJJOOId));
+        sedeRepository.deleteById(sedeJJOOId);
     }
 }

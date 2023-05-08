@@ -10,7 +10,7 @@ import java.util.List;
 public class CiudadEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ciudad")
     private Integer idciudad;
     @Column(name = "nombre_ciudad")
