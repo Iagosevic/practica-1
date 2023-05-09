@@ -49,15 +49,11 @@ public class PaisServiceImpl implements IPaisService {
         PaisEntity newPais = paisMapper.toEntity(paisDto);
         return paisMapper.toDto(paisRepository.findById(idpais)
                 .map(pais -> {
-                    pais.setIdpais(newPais.getIdpais());
-                    pais.setIdpais(newPais.getIdpais());
                     pais.setNombrepais(newPais.getNombrepais());
+                    pais.setCodigopais(newPais.getCodigopais());
                     pais.setValorpais(newPais.getValorpais());
                     return paisRepository.save(pais);
-                }).orElseGet(() -> {
-                    newPais.setIdpais(idpais);
-                    return paisRepository.save(newPais);
-                })
+                }).orElseGet(() -> paisRepository.save(newPais))
         );
     }
     @Override

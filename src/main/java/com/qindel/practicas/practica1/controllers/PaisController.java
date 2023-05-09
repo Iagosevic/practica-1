@@ -25,11 +25,11 @@ public class PaisController {
     public PaisDto getpaisById(@PathVariable("id-pais") Integer idpais){
         return paisService.getPaisByIdPais(idpais);
     }
-    @PostMapping("/addPais")
+    @PostMapping("/pais")
     public PaisDto addPais(@RequestBody PaisDto nuevoPais) {
         return paisService.addPais(nuevoPais);
     }
-    @PutMapping("/editPais/{idpais}")
+    @PutMapping("/pais/{idpais}")
     public PaisDto updatePais(@PathVariable Integer idpais, @RequestBody PaisDto nuevoPais) {
         PaisDto paisEditar = paisService.getPaisByIdPais(idpais);
 
@@ -37,11 +37,10 @@ public class PaisController {
         paisEditar.setCodigopais(nuevoPais.getCodigopais());
         paisEditar.setValorpais(nuevoPais.getValorpais());
 
-        return paisService.addPais(paisEditar);
-
+        return paisService.updatePais(nuevoPais, idpais);
     }
 
-    @DeleteMapping("/deletePais/{idpais}")
+    @DeleteMapping("/pais/{idpais}")
     public void deletePais(@PathVariable Integer idpais) {
         paisService.deletePais(idpais);
     }

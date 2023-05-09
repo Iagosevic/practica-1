@@ -49,13 +49,9 @@ public class TipoServiceImpl implements ITipoService {
         TipoEntity newTipoJJOO = tipoMapper.toEntity(tipoJJOODto);
         return tipoMapper.toDto(tipoRepository.findById(id_tipo_jjoo)
                 .map(tipo -> {
-                    tipo.setIdtipojjoo(newTipoJJOO.getIdtipojjoo());
                     tipo.setDescripciontipo(newTipoJJOO.getDescripciontipo());
                     return tipoRepository.save(tipo);
-                }).orElseGet(() -> {
-                    newTipoJJOO.setIdtipojjoo(id_tipo_jjoo);
-                    return tipoRepository.save(newTipoJJOO);
-                })
+                }).orElseGet(() -> tipoRepository.save(newTipoJJOO))
         );
     }
 

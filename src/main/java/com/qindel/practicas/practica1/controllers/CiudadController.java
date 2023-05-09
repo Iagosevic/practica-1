@@ -24,11 +24,11 @@ public class CiudadController {
     public CiudadDto getCiudadByIdCiudad(@PathVariable("id-ciudad") Integer idciudad){
         return ciudadService.getCiudadByIdCiudad(idciudad);
     }
-    @PostMapping("/addCiudad")
+    @PostMapping("/ciudad")
     public CiudadDto addCiudad(@RequestBody CiudadDto nuevaCiudad) {
         return ciudadService.addCiudad(nuevaCiudad);
     }
-    @PutMapping("/editCiudad/{idciudad}")
+    @PutMapping("/ciudad/{idciudad}")
     public CiudadDto updateCiudad(@PathVariable Integer idciudad, @RequestBody CiudadDto nuevaCiudad) {
         CiudadDto ciudadEditar = ciudadService.getCiudadByIdCiudad(idciudad);
 
@@ -36,11 +36,10 @@ public class CiudadController {
         ciudadEditar.setIdpais(nuevaCiudad.getIdpais());
         ciudadEditar.setValorciudad(nuevaCiudad.getValorciudad());
 
-        return ciudadService.addCiudad(ciudadEditar);
-
+        return ciudadService.updateCiudad(nuevaCiudad, idciudad);
     }
 
-    @DeleteMapping("/deleteCiudad/{idciudad}")
+    @DeleteMapping("/ciudad/{idciudad}")
     public void deleteCiudad(@PathVariable Integer idciudad) {
         ciudadService.deleteCiudad(idciudad);
     }

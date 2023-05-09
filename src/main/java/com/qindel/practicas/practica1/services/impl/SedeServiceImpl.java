@@ -51,15 +51,9 @@ public class SedeServiceImpl implements ISedeService {
         SedeEntity newSedeJJOO = sedeMapper.toEntity(sedeJJOODto);
         return sedeMapper.toDto(sedeRepository.findById(sedeJJOOId)
                 .map(sede -> {
-                    sede.setAnho(newSedeJJOO.getAnho());
-                    sede.setIdtipojjoo(newSedeJJOO.getIdtipojjoo());
                     sede.setSede(newSedeJJOO.getSede());
                     return sedeRepository.save(sede);
-                }).orElseGet(() -> {
-                    newSedeJJOO.setAnho(anno);
-                    newSedeJJOO.setIdtipojjoo(id_tipo_jjoo);
-                    return sedeRepository.save(newSedeJJOO);
-                })
+                }).orElseGet(() -> sedeRepository.save(newSedeJJOO))
         );
     }
     @Override
