@@ -26,8 +26,8 @@ public class TipoController {
     public TipoDto addTipo(@RequestBody TipoDto nuevoTipo) {
         return tipoService.addTipo(nuevoTipo);
     }
-    @PutMapping("/tipo/{idtipo}")
-    public TipoDto updateTipo(@PathVariable Integer idtipo, @RequestBody TipoDto nuevoTipo) {
+    @PutMapping("/tipo/{id-tipo-jjoo}")
+    public TipoDto updateTipo(@PathVariable("id-tipo-jjoo") Integer idtipo, @RequestBody TipoDto nuevoTipo) {
         TipoDto tipoEditar = tipoService.getTipoById(idtipo);
 
         tipoEditar.setDescripciontipo(nuevoTipo.getDescripciontipo());
@@ -35,8 +35,8 @@ public class TipoController {
         return tipoService.updateTipo(nuevoTipo, idtipo);
     }
 
-    @DeleteMapping("/tipo/{idtipo}")
-    public void deleteTipo(@PathVariable Integer idtipo) {
+    @DeleteMapping("/tipo/{id-tipo-jjoo}")
+    public void deleteTipo(@PathVariable("id-tipo-jjoo") Integer idtipo) {
         tipoService.deleteTipo(idtipo);
     }
 }

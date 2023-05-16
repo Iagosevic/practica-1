@@ -28,8 +28,8 @@ public class CiudadController {
     public CiudadDto addCiudad(@RequestBody CiudadDto nuevaCiudad) {
         return ciudadService.addCiudad(nuevaCiudad);
     }
-    @PutMapping("/ciudad/{idciudad}")
-    public CiudadDto updateCiudad(@PathVariable Integer idciudad, @RequestBody CiudadDto nuevaCiudad) {
+    @PutMapping("/ciudad/{id-ciudad}")
+    public CiudadDto updateCiudad(@PathVariable("id-ciudad") Integer idciudad, @RequestBody CiudadDto nuevaCiudad) {
         CiudadDto ciudadEditar = ciudadService.getCiudadByIdCiudad(idciudad);
 
         ciudadEditar.setNombreciudad(nuevaCiudad.getNombreciudad());
@@ -39,8 +39,8 @@ public class CiudadController {
         return ciudadService.updateCiudad(nuevaCiudad, idciudad);
     }
 
-    @DeleteMapping("/ciudad/{idciudad}")
-    public void deleteCiudad(@PathVariable Integer idciudad) {
+    @DeleteMapping("/ciudad/{id-ciudad}")
+    public void deleteCiudad(@PathVariable("id-ciudad") Integer idciudad) {
         ciudadService.deleteCiudad(idciudad);
     }
 

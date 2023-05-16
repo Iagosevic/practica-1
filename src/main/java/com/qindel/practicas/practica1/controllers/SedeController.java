@@ -20,8 +20,8 @@ public class SedeController {
     public List<SedeDto> getSedes() {
         return sedeService.getAllSedes();
     }
-    @GetMapping("/anho/{anho}/idsedejjoo/{idsedejjoo}")
-    public SedeDto getSedebyAnho(@PathVariable Integer anho, @PathVariable Integer idsedejjoo){
+    @GetMapping("/anho/{anho}/idsedejjoo/{id-sede-jjoo}")
+    public SedeDto getSedebyAnho(@PathVariable Integer anho, @PathVariable("id-sede-jjoo") Integer idsedejjoo){
         return sedeService.getSedeById(anho, idsedejjoo);
     }
 
@@ -29,8 +29,8 @@ public class SedeController {
     public SedeDto addSede(@RequestBody SedeDto nuevaSede) {
         return sedeService.addSede(nuevaSede);
     }
-    @PutMapping("/sede/anho/{anho}/idsedejjoo/{idsedejjoo}")
-    public SedeDto updateSede(@PathVariable Integer anho, @PathVariable Integer idsedejjoo, @RequestBody SedeDto nuevaSede) {
+    @PutMapping("/sede/anho/{anho}/idsedejjoo/{id-sede-jjoo}")
+    public SedeDto updateSede(@PathVariable Integer anho, @PathVariable("id-sede-jjoo") Integer idsedejjoo, @RequestBody SedeDto nuevaSede) {
         SedeDto sedeEditar = sedeService.getSedeById(anho, idsedejjoo);
 
         sedeEditar.setSede(nuevaSede.getSede());
@@ -40,8 +40,8 @@ public class SedeController {
         return sedeService.updateSede(nuevaSede, anho, idsedejjoo);
     }
 
-    @DeleteMapping("/sede/anho/{anho}/idsedejjoo/{idsedejjoo}")
-    public void deleteSede(@PathVariable Integer anho, @PathVariable Integer idsedejjoo) {
+    @DeleteMapping("/sede/anho/{anho}/idsedejjoo/{id-sede-jjoo}")
+    public void deleteSede(@PathVariable Integer anho, @PathVariable("id-sede-jjoo") Integer idsedejjoo) {
         sedeService.deleteSede(anho, idsedejjoo);
     }
 }
