@@ -2,6 +2,8 @@ package com.qindel.practicas.practica1.services;
 
 import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.apirest.PaisDto;
+import com.qindel.practicas.practica1.apirest.PaisDto;
+import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.mapper.IPaisMapper;
@@ -10,6 +12,7 @@ import com.qindel.practicas.practica1.services.impl.PaisServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -98,21 +102,58 @@ public class PaisServiceImplTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"5,Brasil,br,300"})
-    public PaisDto updatePais(PaisDto paisDto, Integer idPais) {
-        PaisEntity newPais = paisMapper.toEntity(paisDto);
-        return paisMapper.toDto(paisRepository.findById(idPais)
-                .map(pais -> {
-                    pais.setCodigopais(newPais.getCodigopais());
-                    pais.setIdpais(newPais.getIdpais());
-                    pais.setNombrepais(newPais.getNombrepais());
-                    pais.setValorpais(newPais.getValorpais());
-                    return paisRepository.save(pais);
-                }).orElseGet(() -> {
-                    newPais.setIdpais(idPais);
-                    return paisRepository.save(newPais);
-                })
-        );
+    @CsvSource({"5,Botswana,bt,900"})
+    public void updatePais(String id_paisString, String nombre_pais, String codigo_pais, String valor_paisString) {
+
+        Integer id_pais = Integer.parseInt(id_paisString);
+        Integer valor_pais = Integer.parseInt(valor_paisString);
+
+        PaisEntity paisEntity = new PaisEntity(id_pais, nombre_pais, codigo_pais, valor_pais);
+        when(paisRepository.save(paisEntity)).thenReturn(paisEntity);
+
+        PaisDto paisDto = new PaisDto(id_pais, nombre_pais, codigo_pais, valor_pais);
+        when(paisMapper.toDto(paisEntity)).thenReturn(paisDto);
+        when(paisMapper.toEntity(paisDto)).thenReturn(paisEntity);
+
+        Mockito.when(paisRepository.findById(1)).thenReturn(Optional.of(paisEntity));
+        Mockito.when(paisRepository.save(Mockito.any(PaisEntity.class))).thenReturn(paisEntity);
+
+        PaisDto updatedPais = paisService.updatePais(paisDto, 1);
+
+
+        assertEquals(paisDto.getIdpais(), updatedPais.getIdpais());
+        assertEquals(paisDto.getIdpais(), updatedPais.getIdpais());
+        assertEquals(paisDto.getNombrepais(), updatedPais.getNombrepais());
+        assertEquals(paisDto.getValorpais(), updatedPais.getValorpais());
+    }
+
+    @ParameterizedTest
+    @CsvSource({"5,Botswana,bt,900"})
+    public void updatePaisNotFoundTest(String id_paisString, String nombre_pais, String codigo_pais, String nuevoValor_paisString) throws Exception {
+        Integer id_pais = Integer.parseInt(id_paisString);
+
+        Integer nuevoValor_pais = Integer.parseInt(nuevoValor_paisString);
+
+        PaisEntity paisNew = new PaisEntity(id_pais,nombre_pais,codigo_pais,nuevoValor_pais);
+
+        PaisDto paisDto = new PaisDto(id_pais,nombre_pais,codigo_pais,nuevoValor_pais);
+
+        when(paisRepository.findById(id_pais)).thenReturn(Optional.empty());
+        when(paisRepository.save(paisNew)).thenReturn(paisNew);
+        when(paisMapper.toEntity(paisDto)).thenReturn(paisNew);
+        when(paisMapper.toDto(paisNew)).thenReturn(paisDto);
+        PaisDto paisDtoNewExpected = paisService.updatePais(paisDto, id_pais);
+
+        Mockito.verify(paisRepository, times(1)).findById(id_pais);
+        Mockito.verify(paisRepository, times(1)).save(paisNew);
+        assertThat(paisDto).isEqualTo(paisDtoNewExpected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, Integer.MAX_VALUE})
+    public void deletePaisTest(int id) throws Exception {
+        paisService.deletePais(id);
+        Mockito.verify(paisRepository).deleteById(id);
     }
 
 }
