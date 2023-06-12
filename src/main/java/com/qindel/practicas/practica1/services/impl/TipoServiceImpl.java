@@ -49,28 +49,25 @@ public class TipoServiceImpl implements ITipoService {
         tipoOT.setOperation("Tipo " + tipo.getDescripciontipo()+ " añadido");
         tipoOT.setTimestamp(new Date());
         tipoOTRepository.save(tipoOT);
+
         return tipoMapper.toDto(tipoRepository.save(tipoMapper.toEntity(tipo)));
     }
 
     public TipoDto updateTipo(TipoDto tipoDto, Integer id_tipo_jjoo) {
         TipoOperationTrace tipoOT = new TipoOperationTrace();
         tipoOT.setOperation("Tipo "
-                + tipoDto.getIdtipojjoo()
+                + id_tipo_jjoo
                 + " actualizado, valores actuales, nombre:"
                 + tipoDto.getDescripciontipo());
         tipoOT.setTimestamp(new Date());
         tipoOTRepository.save(tipoOT);
 
-        TipoEntity newTipo = tipoMapper.toEntity(tipoDto);
+        TipoEntity newTipoJJOO = tipoMapper.toEntity(tipoDto);
         return tipoMapper.toDto(tipoRepository.findById(id_tipo_jjoo)
                 .map(tipo -> {
-                    tipo.setIdtipojjoo(newTipo.getIdtipojjoo());
-                    tipo.setDescripciontipo(newTipo.getDescripciontipo());
+                    tipo.setDescripciontipo(newTipoJJOO.getDescripciontipo());
                     return tipoRepository.save(tipo);
-                }).orElseGet(() -> {
-                    newTipo.setIdtipojjoo(id_tipo_jjoo);
-                    return tipoRepository.save(newTipo);
-                })
+                }).orElseGet(() -> tipoRepository.save(newTipoJJOO))
         );
     }
 
@@ -80,6 +77,7 @@ public class TipoServiceImpl implements ITipoService {
         tipoOT.setOperation("Tipo " + idTipo+ " eliminado");
         tipoOT.setTimestamp(new Date());
         tipoOTRepository.save(tipoOT);
+
         tipoRepository.deleteById(idTipo);
     }
 }

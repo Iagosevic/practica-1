@@ -50,14 +50,16 @@ public class PaisServiceImpl implements IPaisService {
         paisOT.setOperation("Pais " + pais.getNombrepais()+ " añadido");
         paisOT.setTimestamp(new Date());
         paisOTRepository.save(paisOT);
+
         return paisMapper.toDto(paisRepository.save(paisMapper.toEntity(pais)));
     }
 
     @Override
     public PaisDto updatePais(PaisDto paisDto, Integer idpais) {
+
         PaisOperationTrace paisOT = new PaisOperationTrace();
         paisOT.setOperation("Pais "
-                + paisDto.getIdpais()
+                + idpais
                 + " actualizado, valores actuales, nombre:"
                 + paisDto.getNombrepais() + ", codigo:"
                 + paisDto.getCodigopais() + ", valor:"
@@ -68,15 +70,11 @@ public class PaisServiceImpl implements IPaisService {
         PaisEntity newPais = paisMapper.toEntity(paisDto);
         return paisMapper.toDto(paisRepository.findById(idpais)
                 .map(pais -> {
-                    pais.setIdpais(newPais.getIdpais());
-                    pais.setCodigopais(newPais.getCodigopais());
                     pais.setNombrepais(newPais.getNombrepais());
+                    pais.setCodigopais(newPais.getCodigopais());
                     pais.setValorpais(newPais.getValorpais());
                     return paisRepository.save(pais);
-                }).orElseGet(() -> {
-                    newPais.setIdpais(idpais);
-                    return paisRepository.save(newPais);
-                })
+                }).orElseGet(() -> paisRepository.save(newPais))
         );
     }
     @Override
@@ -85,6 +83,7 @@ public class PaisServiceImpl implements IPaisService {
         paisOT.setOperation("Pais " + idpais+ " eliminado");
         paisOT.setTimestamp(new Date());
         paisOTRepository.save(paisOT);
+
         paisRepository.deleteById(idpais);
     }
     

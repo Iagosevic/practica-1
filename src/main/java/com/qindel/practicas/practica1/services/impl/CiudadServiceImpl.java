@@ -49,13 +49,14 @@ public class CiudadServiceImpl implements ICiudadService {
         ciudadOT.setOperation("Ciudad " + ciudad.getNombreciudad()+ " añadida");
         ciudadOT.setTimestamp(new Date());
         ciudadOTRepository.save(ciudadOT);
+        
         return ciudadMapper.toDto(ciudadRepository.save(ciudadMapper.toEntity(ciudad)));
     }
     @Override
     public CiudadDto updateCiudad(CiudadDto ciudadDto, Integer idciudad) {
         CiudadOperationTrace ciudadOT = new CiudadOperationTrace();
         ciudadOT.setOperation("Ciudad "
-                + ciudadDto.getIdciudad()
+                + idciudad
                 + " actualizada, valores actuales, nombre:"
                 + ciudadDto.getNombreciudad() + ", pais:"
                 + ciudadDto.getIdpais() + ", valor:"
@@ -66,15 +67,11 @@ public class CiudadServiceImpl implements ICiudadService {
         CiudadEntity newCiudad = ciudadMapper.toEntity(ciudadDto);
         return ciudadMapper.toDto(ciudadRepository.findById(idciudad)
                 .map(ciudad -> {
-                    ciudad.setIdciudad(newCiudad.getIdciudad());
                     ciudad.setIdpais(newCiudad.getIdpais());
                     ciudad.setNombreciudad(newCiudad.getNombreciudad());
                     ciudad.setValorciudad(newCiudad.getValorciudad());
                     return ciudadRepository.save(ciudad);
-                }).orElseGet(() -> {
-                    newCiudad.setIdciudad(idciudad);
-                    return ciudadRepository.save(newCiudad);
-                })
+                }).orElseGet(() -> ciudadRepository.save(newCiudad))
         );
     }
     @Override
@@ -83,6 +80,7 @@ public class CiudadServiceImpl implements ICiudadService {
         ciudadOT.setOperation("Ciudad " + idciudad+ " eliminada");
         ciudadOT.setTimestamp(new Date());
         ciudadOTRepository.save(ciudadOT);
+
         ciudadRepository.deleteById(idciudad);
     }
 }

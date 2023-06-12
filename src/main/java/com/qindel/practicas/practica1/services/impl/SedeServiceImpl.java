@@ -51,16 +51,17 @@ public class SedeServiceImpl implements ISedeService {
         sedeOT.setOperation("Sede " + sede.getSede()+ " añadida");
         sedeOT.setTimestamp(new Date());
         sedeOTRepository.save(sedeOT);
+
         return sedeMapper.toDto(sedeRepository.save(sedeMapper.toEntity(sede)));
     }
     @Override
     public SedeDto updateSede(SedeDto sedeDto, Integer anno, Integer id_tipo_jjoo) {
         SedeOperationTrace sedeOT = new SedeOperationTrace();
-        sedeOT.setOperation("Se ha actualizado la sede "
-                + sedeDto.getIdtipojjoo()
-                + ", valores actuales, anno:"
-                + sedeDto.getAnho() + ", sede:"
-                + sedeDto.getSede());
+        sedeOT.setOperation("Sede "
+                + sedeDto.getSede()
+                + " actualizada, valores actuales, anno:"
+                + anno + ", tipo:"
+                + id_tipo_jjoo);
         sedeOT.setTimestamp(new Date());
         sedeOTRepository.save(sedeOT);
 
@@ -68,21 +69,15 @@ public class SedeServiceImpl implements ISedeService {
         SedeEntity newSedeJJOO = sedeMapper.toEntity(sedeDto);
         return sedeMapper.toDto(sedeRepository.findById(sedeJJOOId)
                 .map(sede -> {
-                    sede.setAnho(newSedeJJOO.getAnho());
-                    sede.setIdtipojjoo(newSedeJJOO.getIdtipojjoo());
                     sede.setSede(newSedeJJOO.getSede());
                     return sedeRepository.save(sede);
-                }).orElseGet(() -> {
-                    newSedeJJOO.setAnho(anno);
-                    newSedeJJOO.setIdtipojjoo(id_tipo_jjoo);
-                    return sedeRepository.save(newSedeJJOO);
-                })
+                }).orElseGet(() -> sedeRepository.save(newSedeJJOO))
         );
     }
     @Override
     public void deleteSede(Integer anno, Integer id_tipo_jjoo){
         SedeOperationTrace sedeOT = new SedeOperationTrace();
-        sedeOT.setOperation("Sede del tipo" + id_tipo_jjoo+" y del año " + anno );
+        sedeOT.setOperation("Sede del tipo " + id_tipo_jjoo+" y del año " + anno + " eliminada" );
         sedeOT.setTimestamp(new Date());
         sedeOTRepository.save(sedeOT);
 
