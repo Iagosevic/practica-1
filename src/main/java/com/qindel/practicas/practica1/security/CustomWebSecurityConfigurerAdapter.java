@@ -20,7 +20,6 @@ public class CustomWebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -28,7 +27,7 @@ public class CustomWebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder)
                 .withUser("user").password("$2a$10$9Xn39aPf4LhDpRGNWvDFqu.T5ZPHbyh8iNQDSb4aNSnLqE2u2efIu")
                 .roles("USER").and().passwordEncoder(passwordEncoder).withUser("admin")
-                .password("$2a$10$dl8TemMlPH7Z/mpBurCX8O4lu0FoWbXnhsHTYXVsmgXyzagn..8rK").roles("USER", "ADMIN");
+                .password("$2a$10$dl8TemMlPH7Z/mpBurCX8O4lu0FoWbXnhsHTYXVsmgXyzagn..8rK").roles("USER","ADMIN");
     }
 
     @Bean
@@ -43,4 +42,6 @@ public class CustomWebSecurityConfigurerAdapter {
 
         return http.build();
     }
+
+
 }

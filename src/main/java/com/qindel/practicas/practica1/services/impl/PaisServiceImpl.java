@@ -3,12 +3,15 @@ package com.qindel.practicas.practica1.services.impl;
 import com.qindel.practicas.practica1.apirest.PaisDto;
 import com.qindel.practicas.practica1.entities.PaisEntity;
 import com.qindel.practicas.practica1.mapper.IPaisMapper;
+import com.qindel.practicas.practica1.operationtraces.PaisOperationTrace;
+import com.qindel.practicas.practica1.repositories.IPaisOperationTraceRepository;
 import com.qindel.practicas.practica1.repositories.IPaisRepository;
 import com.qindel.practicas.practica1.services.IPaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,10 +19,12 @@ public class PaisServiceImpl implements IPaisService {
 
 
     private IPaisRepository paisRepository;
+    private IPaisOperationTraceRepository paisOTRepository;
     private IPaisMapper paisMapper;
     @Autowired
-    public PaisServiceImpl(IPaisRepository paisRepository, IPaisMapper paisMapper) {
+    public PaisServiceImpl(IPaisRepository paisRepository, IPaisOperationTraceRepository paisOTRepository, IPaisMapper paisMapper) {
         this.paisRepository = paisRepository;
+        this.paisOTRepository = paisOTRepository;
         this.paisMapper = paisMapper;
     }
 
@@ -41,11 +46,27 @@ public class PaisServiceImpl implements IPaisService {
 
     @Override
     public PaisDto addPais(PaisDto pais) {
+        PaisOperationTrace paisOT = new PaisOperationTrace();
+        paisOT.setOperation("Pais " + pais.getNombrepais()+ " añadido");
+        paisOT.setTimestamp(new Date());
+        paisOTRepository.save(paisOT);
+
         return paisMapper.toDto(paisRepository.save(paisMapper.toEntity(pais)));
     }
 
     @Override
     public PaisDto updatePais(PaisDto paisDto, Integer idpais) {
+
+        PaisOperationTrace paisOT = new PaisOperationTrace();
+        paisOT.setOperation("Pais "
+                + idpais
+                + " actualizado, valores actuales, nombre:"
+                + paisDto.getNombrepais() + ", codigo:"
+                + paisDto.getCodigopais() + ", valor:"
+                + paisDto.getValorpais());
+        paisOT.setTimestamp(new Date());
+        paisOTRepository.save(paisOT);
+
         PaisEntity newPais = paisMapper.toEntity(paisDto);
         return paisMapper.toDto(paisRepository.findById(idpais)
                 .map(pais -> {
@@ -58,6 +79,11 @@ public class PaisServiceImpl implements IPaisService {
     }
     @Override
     public void deletePais(Integer idpais) {
+        PaisOperationTrace paisOT = new PaisOperationTrace();
+        paisOT.setOperation("Pais " + idpais+ " eliminado");
+        paisOT.setTimestamp(new Date());
+        paisOTRepository.save(paisOT);
+
         paisRepository.deleteById(idpais);
     }
     
