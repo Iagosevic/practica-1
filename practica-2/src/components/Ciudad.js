@@ -26,7 +26,7 @@ export default function Ciudad() {
         console.log(ciudades)
         fetch("http://localhost:8080/ciudades/",{
             method:"POST",
-            headers:{"Content-Type":"application/json", "user":"admin", "password":"admin"},
+            headers:{"Content-Type":"application/json"},
             body:JSON.stringify(ciudades)
 
         }).then(()=>{
