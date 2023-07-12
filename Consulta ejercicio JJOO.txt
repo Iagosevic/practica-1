@@ -1,0 +1,20 @@
+Select 
+p.id_pais AS ID_PAIS, 
+p.nombre_pais AS NOMBRE_PAIS, 
+c.id_ciudad AS ID_CIUDAD, 
+c.nombre_ciudad AS NOMBRE_CIUDAD,
+ifnull(c.valor_ciudad, p.valor_pais) as VALOR,
+tj.descripcion_tipo AS TIPO_JJOO,
+count(sj.sede) as VECES_SEDE
+FROM Ciudad c
+LEFT JOIN pais p
+ON p.id_pais = c.id_pais
+left join sede_jjoo sj
+on sj.sede = c.id_ciudad
+left join tipo_jjoo tj
+on tj.id_tipo_jjoo = sj.id_tipo_jjoo
+group by p.id_pais, nombre_pais, id_ciudad, nombre_ciudad, valor, tj.descripcion_tipo
+
+
+
+
