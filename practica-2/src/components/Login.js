@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useReducer, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Container ,Paper,Button} from '@material-ui/core';
@@ -18,6 +18,7 @@ function Auth(){
     const paperStyle={padding:'50px 20px', width:600,margin:"20px auto"}
     const[user,setUser]=useState('')
     const[pass,setPass]=useState('')
+    const[logueado,setLogueado]=useState("no")
 
     const classes = useStyles();
     const navigate = useNavigate();
@@ -37,11 +38,14 @@ function Auth(){
         e.preventDefault()
         const usuario={user,pass}
         console.log(usuario)
-        console.log("1"+user)
-        console.log("2"+pass)
+
         //const account = usersRegistrados.find((u) => u.username === user);
         if (usersRegistrados.find((u) => u.username === user) &&
             usersRegistrados.find((u) => u.password === pass)){
+
+            localStorage.setItem("user", usuario.username);
+            localStorage.setItem("passwd", usuario.password);
+            localStorage.setItem("logueado", "si");
             navigate("/Ciudad");
         }
         else{
